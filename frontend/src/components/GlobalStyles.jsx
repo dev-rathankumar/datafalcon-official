@@ -23,6 +23,18 @@ export default function GlobalStyles() {
         .df-cta { margin:0 1rem 2rem !important; padding:2rem 1.25rem !important; }
         .df-fi { flex-direction:column !important; text-align:center !important; gap:12px !important; }
         .df-hbtns { flex-wrap:wrap !important; justify-content:center !important; }
+        .df-industry-row { flex-direction:column !important; }
+        .df-industry-visual { flex-basis:auto !important; width:100% !important; max-width:280px !important; margin:0 auto !important; }
+        .df-challenge-grid { grid-template-columns:1fr !important; gap:1rem !important; }
+        .df-case-grid { grid-template-columns:1fr !important; }
+        .df-pillars-grid { grid-template-columns:repeat(2,1fr) !important; }
+        .df-journey-flow { flex-direction:column !important; align-items:stretch !important; }
+        .df-journey-arrow { display:none !important; }
+        .df-arch-flow { flex-direction:column !important; align-items:center !important; }
+        .df-arch-flow > div { flex-direction:column !important; }
+        .df-arch-connector { transform:rotate(90deg) !important; }
+        .df-arch-panel { width:100% !important; right:0 !important; top:auto !important; bottom:0 !important; height:80vh !important; border-left:none !important; border-top:0.5px solid rgba(0,212,255,0.1) !important; }
+        .df-delivery-grid { grid-template-columns:1fr !important; }
       }
     `}</style>
   );

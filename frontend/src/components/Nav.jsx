@@ -3,8 +3,8 @@ import { T } from "../theme";
 
 const NAV_LINKS = [
   { label: "Services", to: "/services" },
-  { label: "Industries", to: "#" },
-  { label: "Our Work", to: "#" },
+  { label: "Industries", to: "/industries" },
+  { label: "Our Work", to: "/our-work" },
   { label: "About Us", to: "#" },
   { label: "Contact", to: "#" },
 ];
