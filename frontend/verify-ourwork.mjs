@@ -39,7 +39,7 @@ const sections = [
   ["text=Technology Ecosystem", "05-tech-ecosystem"],
   ["text=Delivery Framework", "06-delivery-framework"],
   ["text=Results measured in production", "07-outcomes"],
-  ["text=Why Enterprises Choose Data Falcon", "08-why-df"],
+  ["text=Why Enterprises Choose Kaizen Agentics", "08-why-df"],
   ["text=Let's Build Your Modern Data Platform.", "09-final-cta"],
 ];
 for (const [sel, name] of sections) {
@@ -69,7 +69,7 @@ for (const label of tabLabels) {
     await btn.click();
     await page.waitForTimeout(500);
     const hasPurpose = await page.locator("text=Purpose").count();
-    const hasImpl = await page.locator("text=How Data Falcon Implements It").count();
+    const hasImpl = await page.locator("text=How Kaizen Agentics Implements It").count();
     const panelTitle = await page.locator("div").filter({ hasText: /./ }).first();
     console.log(`  clicked node "${label2}" -> Purpose visible: ${hasPurpose > 0}, Implementation visible: ${hasImpl > 0}`);
     await shot(`arch-${label.replace(/\s+/g, "_")}-node${i}`);

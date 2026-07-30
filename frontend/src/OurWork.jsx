@@ -281,7 +281,7 @@ export default function OurWork() {
               Interactive Architecture Explorer
             </h2>
             <p style={{ color: T.muted, fontSize: "0.9rem", lineHeight: 1.7, fontWeight: 300, maxWidth: 640, margin: "0 auto 2rem" }}>
-              Click any node to see how Data Falcon designs, governs, and implements every layer of the platform.
+              Click any node to see how Kaizen Agentics designs, governs, and implements every layer of the platform.
             </p>
           </div>
         </Reveal>
@@ -401,9 +401,9 @@ export default function OurWork() {
       <section className="df-sec" style={{ padding: "3.5rem 2rem", maxWidth: 1080, margin: "0 auto" }}>
         <Reveal direction="up">
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <Eyebrow>Why Data Falcon</Eyebrow>
+            <Eyebrow>Why Kaizen Agentics</Eyebrow>
             <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 600, letterSpacing: "-0.025em", marginBottom: 8 }}>
-              Why Enterprises Choose Data Falcon
+              Why Enterprises Choose Kaizen Agentics
             </h2>
             <p style={{ color: T.muted, fontSize: "0.9rem", lineHeight: 1.7, fontWeight: 300 }}>
               The same discipline behind every platform we deliver.

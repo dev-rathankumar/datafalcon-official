@@ -18,7 +18,7 @@ export const ARCHITECTURES = [
           "Isolate extraction load from production OLTP workloads",
           "Version source schemas so downstream pipelines can detect drift",
         ],
-        implementation: "Data Falcon connects to Oracle via managed, credential-vaulted linked services and schedules incremental CDC-based extraction rather than nightly full loads, minimizing impact on production systems.",
+        implementation: "Kaizen Agentics connects to Oracle via managed, credential-vaulted linked services and schedules incremental CDC-based extraction rather than nightly full loads, minimizing impact on production systems.",
         relatedServices: ["Data Engineering", "Cloud Migration"],
       } },
       { id: "src-sqlserver", label: "SQL Server", col: 0, category: "source", detail: {
@@ -29,7 +29,7 @@ export const ARCHITECTURES = [
           "Standardize timezone and encoding handling before ingestion",
           "Track row-level watermarks for reliable incremental loads",
         ],
-        implementation: "Data Falcon configures incremental extraction using SQL Server change tracking, orchestrated centrally alongside every other source in the same ingestion pipeline.",
+        implementation: "Kaizen Agentics configures incremental extraction using SQL Server change tracking, orchestrated centrally alongside every other source in the same ingestion pipeline.",
         relatedServices: ["Data Engineering", "Cloud Migration"],
       } },
       { id: "src-snowflake", label: "Snowflake", col: 0, category: "source", detail: {
@@ -40,7 +40,7 @@ export const ARCHITECTURES = [
           "Pull via secure data sharing where available instead of file export",
           "Reconcile row counts after each sync to catch silent drift",
         ],
-        implementation: "Data Falcon integrates Snowflake as a first-class source using native connectors, letting existing curated tables land directly into the lakehouse's bronze layer without duplicating transformation logic.",
+        implementation: "Kaizen Agentics integrates Snowflake as a first-class source using native connectors, letting existing curated tables land directly into the lakehouse's bronze layer without duplicating transformation logic.",
         relatedServices: ["Data Engineering", "Data Platform Modernization"],
       } },
       { id: "src-sap", label: "SAP", col: 0, category: "source", detail: {
@@ -51,7 +51,7 @@ export const ARCHITECTURES = [
           "Preserve SAP business logic (currency, unit conversions) at extraction time",
           "Coordinate extraction windows with SAP batch jobs to avoid contention",
         ],
-        implementation: "Data Falcon extracts SAP data through certified connectors into Azure Data Factory, preserving business-context fields so finance and operations reporting stays accurate downstream.",
+        implementation: "Kaizen Agentics extracts SAP data through certified connectors into Azure Data Factory, preserving business-context fields so finance and operations reporting stays accurate downstream.",
         relatedServices: ["Data Engineering", "Enterprise Integration"],
       } },
       { id: "adf", label: "Azure Data Factory", col: 1, category: "ingest", detail: {
@@ -62,7 +62,7 @@ export const ARCHITECTURES = [
           "Centralize monitoring and alerting on pipeline failures",
           "Separate orchestration metadata from business data",
         ],
-        implementation: "Data Falcon builds metadata-driven ADF pipelines that dynamically loop across source systems, so onboarding a new source system is a configuration change, not a new pipeline.",
+        implementation: "Kaizen Agentics builds metadata-driven ADF pipelines that dynamically loop across source systems, so onboarding a new source system is a configuration change, not a new pipeline.",
         relatedServices: ["Data Engineering", "Cloud Migration"],
       } },
       { id: "landing", label: "Landing Zone", col: 2, category: "storage", detail: {
@@ -73,7 +73,7 @@ export const ARCHITECTURES = [
           "Partition by ingestion date for efficient reprocessing",
           "Retain landing data long enough to support full reprocessing",
         ],
-        implementation: "Data Falcon lands every source as Parquet/Delta files in Azure Data Lake Storage, partitioned by source and load date, giving a complete audit trail before any transformation begins.",
+        implementation: "Kaizen Agentics lands every source as Parquet/Delta files in Azure Data Lake Storage, partitioned by source and load date, giving a complete audit trail before any transformation begins.",
         relatedServices: ["Data Engineering", "Data Governance"],
       } },
       { id: "bronze", label: "Bronze", col: 3, category: "medallion-bronze", detail: {
@@ -84,7 +84,7 @@ export const ARCHITECTURES = [
           "Track ingestion metadata (source, timestamp, batch id) per row",
           "Never delete bronze history — append and version instead",
         ],
-        implementation: "Data Falcon converts landed files into Delta tables with enforced schemas, capturing full lineage metadata so every downstream row can be traced back to its exact source batch.",
+        implementation: "Kaizen Agentics converts landed files into Delta tables with enforced schemas, capturing full lineage metadata so every downstream row can be traced back to its exact source batch.",
         relatedServices: ["Data Engineering", "Data Platform Modernization"],
       } },
       { id: "silver", label: "Silver", col: 4, category: "medallion-silver", detail: {
@@ -95,7 +95,7 @@ export const ARCHITECTURES = [
           "Conform dimensions (customer, product, date) across all sources",
           "Version transformation logic alongside the data it produces",
         ],
-        implementation: "Data Falcon builds PySpark transformation jobs that cleanse, deduplicate, and conform bronze data into consistent silver tables shared across every downstream analytics and AI use case.",
+        implementation: "Kaizen Agentics builds PySpark transformation jobs that cleanse, deduplicate, and conform bronze data into consistent silver tables shared across every downstream analytics and AI use case.",
         relatedServices: ["Data Engineering", "AI & Machine Learning"],
       } },
       { id: "gold", label: "Gold", col: 5, category: "medallion-gold", detail: {
@@ -106,7 +106,7 @@ export const ARCHITECTURES = [
           "Document ownership and refresh SLAs for every gold dataset",
           "Grant access at the gold layer, not upstream, to keep governance simple",
         ],
-        implementation: "Data Falcon curates gold-layer star schemas aligned to specific business domains, governed end-to-end through Unity Catalog so every consumer sees the same trusted numbers.",
+        implementation: "Kaizen Agentics curates gold-layer star schemas aligned to specific business domains, governed end-to-end through Unity Catalog so every consumer sees the same trusted numbers.",
         relatedServices: ["Data Engineering", "Data Governance", "Business Intelligence"],
       } },
       { id: "powerbi", label: "Power BI", col: 6, category: "consumption", detail: {
@@ -117,7 +117,7 @@ export const ARCHITECTURES = [
           "Use direct lake / import mode intentionally based on freshness needs",
           "Apply row-level security aligned with Unity Catalog permissions",
         ],
-        implementation: "Data Falcon builds governed Power BI semantic models directly on gold-layer Delta tables, giving business users live, trusted dashboards without duplicating data.",
+        implementation: "Kaizen Agentics builds governed Power BI semantic models directly on gold-layer Delta tables, giving business users live, trusted dashboards without duplicating data.",
         relatedServices: ["Business Intelligence", "Data Governance"],
       } },
       { id: "ai", label: "AI", col: 6, category: "ai", detail: {
@@ -128,7 +128,7 @@ export const ARCHITECTURES = [
           "Track model lineage back to the exact training dataset version",
           "Monitor for data drift between training and production data",
         ],
-        implementation: "Data Falcon builds ML pipelines directly on gold-layer data using Databricks ML, deploying models and AI agents that stay in sync with the same trusted, governed data BI dashboards use.",
+        implementation: "Kaizen Agentics builds ML pipelines directly on gold-layer data using Databricks ML, deploying models and AI agents that stay in sync with the same trusted, governed data BI dashboards use.",
         relatedServices: ["AI & Machine Learning", "AI Agents & LLMs"],
       } },
     ],
@@ -152,7 +152,7 @@ export const ARCHITECTURES = [
           "Document source ownership and change-notification process",
           "Validate schema before every ingestion run",
         ],
-        implementation: "Data Falcon connects Oracle to Fabric using Data Factory pipelines native to the Fabric workspace, keeping ingestion and transformation in a single governed environment.",
+        implementation: "Kaizen Agentics connects Oracle to Fabric using Data Factory pipelines native to the Fabric workspace, keeping ingestion and transformation in a single governed environment.",
         relatedServices: ["Data Engineering", "Microsoft Fabric Modernization"],
       } },
       { id: "pipeline", label: "Pipeline", col: 1, category: "ingest", detail: {
@@ -163,7 +163,7 @@ export const ARCHITECTURES = [
           "Centralize failure alerting inside the Fabric workspace",
           "Keep orchestration logic separate from transformation logic",
         ],
-        implementation: "Data Falcon builds parameterized Fabric Data Factory pipelines that extract from source systems on a defined schedule, with built-in monitoring and retry logic.",
+        implementation: "Kaizen Agentics builds parameterized Fabric Data Factory pipelines that extract from source systems on a defined schedule, with built-in monitoring and retry logic.",
         relatedServices: ["Data Engineering", "Microsoft Fabric Modernization"],
       } },
       { id: "lakehouse", label: "Lakehouse", col: 2, category: "storage", detail: {
@@ -174,7 +174,7 @@ export const ARCHITECTURES = [
           "Separate raw and cleansed zones within the same Lakehouse",
           "Apply consistent naming conventions across tables and files",
         ],
-        implementation: "Data Falcon structures the Fabric Lakehouse into clear raw and cleansed zones, using Delta tables throughout so both engineers and analysts query the same underlying data.",
+        implementation: "Kaizen Agentics structures the Fabric Lakehouse into clear raw and cleansed zones, using Delta tables throughout so both engineers and analysts query the same underlying data.",
         relatedServices: ["Data Platform Modernization", "Microsoft Fabric Modernization"],
       } },
       { id: "notebook", label: "Notebook", col: 3, category: "transform", detail: {
@@ -185,7 +185,7 @@ export const ARCHITECTURES = [
           "Modularize transformation logic into reusable functions",
           "Log data-quality check results for every run",
         ],
-        implementation: "Data Falcon writes PySpark notebooks inside Fabric to cleanse, join, and conform Lakehouse data, with data-quality checks logged on every execution.",
+        implementation: "Kaizen Agentics writes PySpark notebooks inside Fabric to cleanse, join, and conform Lakehouse data, with data-quality checks logged on every execution.",
         relatedServices: ["Data Engineering", "Microsoft Fabric Modernization"],
       } },
       { id: "warehouse", label: "Warehouse", col: 4, category: "storage", detail: {
@@ -196,7 +196,7 @@ export const ARCHITECTURES = [
           "Index and partition large fact tables for query performance",
           "Enforce access control at the warehouse layer",
         ],
-        implementation: "Data Falcon curates Fabric Warehouse tables modeled around specific business domains, giving analysts fast, governed SQL access to trusted data.",
+        implementation: "Kaizen Agentics curates Fabric Warehouse tables modeled around specific business domains, giving analysts fast, governed SQL access to trusted data.",
         relatedServices: ["Data Platform Modernization", "Data Governance"],
       } },
       { id: "semantic-model", label: "Semantic Model", col: 5, category: "medallion-gold", detail: {
@@ -207,7 +207,7 @@ export const ARCHITECTURES = [
           "Document every measure's business definition",
           "Apply row-level security consistently across the model",
         ],
-        implementation: "Data Falcon builds a single Fabric Semantic Model per business domain, centralizing metric definitions so every Power BI report calculates numbers the same way.",
+        implementation: "Kaizen Agentics builds a single Fabric Semantic Model per business domain, centralizing metric definitions so every Power BI report calculates numbers the same way.",
         relatedServices: ["Business Intelligence", "Data Governance"],
       } },
       { id: "powerbi-fabric", label: "Power BI", col: 6, category: "consumption", detail: {
@@ -218,7 +218,7 @@ export const ARCHITECTURES = [
           "Reuse visuals and templates across similar reports",
           "Monitor report usage to retire stale dashboards",
         ],
-        implementation: "Data Falcon builds Power BI reports directly against the Fabric Semantic Model, giving business users live, governed dashboards inside the same Fabric environment as the data.",
+        implementation: "Kaizen Agentics builds Power BI reports directly against the Fabric Semantic Model, giving business users live, governed dashboards inside the same Fabric environment as the data.",
         relatedServices: ["Business Intelligence", "Microsoft Fabric Modernization"],
       } },
     ],
@@ -241,7 +241,7 @@ export const ARCHITECTURES = [
           "Identify orphaned or unused tables before migrating them",
           "Capture current access patterns as a baseline for validation",
         ],
-        implementation: "Data Falcon runs a full inventory pass across the Hive Metastore, cataloging every table, schema, and grant as the baseline for migration planning.",
+        implementation: "Kaizen Agentics runs a full inventory pass across the Hive Metastore, cataloging every table, schema, and grant as the baseline for migration planning.",
         relatedServices: ["Unity Catalog Migration", "Data Governance"],
       } },
       { id: "assessment", label: "Assessment", col: 1, category: "process", detail: {
@@ -252,7 +252,7 @@ export const ARCHITECTURES = [
           "Identify downstream jobs and dashboards dependent on each table",
           "Flag legacy permission patterns that don't map cleanly to Unity Catalog",
         ],
-        implementation: "Data Falcon runs Databricks' assessment tooling against the estate to surface dependency risk and permission gaps, producing a prioritized, risk-ranked migration plan before any table moves.",
+        implementation: "Kaizen Agentics runs Databricks' assessment tooling against the estate to surface dependency risk and permission gaps, producing a prioritized, risk-ranked migration plan before any table moves.",
         relatedServices: ["Unity Catalog Migration", "Enterprise Architecture Advisory"],
       } },
       { id: "ucx", label: "UCX", col: 2, category: "process", detail: {
@@ -263,7 +263,7 @@ export const ARCHITECTURES = [
           "Migrate in small, validated batches, not the whole estate at once",
           "Keep the original Hive Metastore intact until validation completes",
         ],
-        implementation: "Data Falcon runs UCX in phased batches, validating each batch's table integrity and permissions before proceeding to the next, keeping a rollback path available throughout.",
+        implementation: "Kaizen Agentics runs UCX in phased batches, validating each batch's table integrity and permissions before proceeding to the next, keeping a rollback path available throughout.",
         relatedServices: ["Unity Catalog Migration", "Data Engineering"],
       } },
       { id: "migration", label: "Migration", col: 3, category: "process", detail: {
@@ -274,7 +274,7 @@ export const ARCHITECTURES = [
           "Reconcile row counts and checksums after every migrated batch",
           "Communicate migration windows to downstream consumers in advance",
         ],
-        implementation: "Data Falcon migrates tables batch by batch with automated row-count and checksum reconciliation after each run, so discrepancies are caught immediately, not discovered downstream.",
+        implementation: "Kaizen Agentics migrates tables batch by batch with automated row-count and checksum reconciliation after each run, so discrepancies are caught immediately, not discovered downstream.",
         relatedServices: ["Unity Catalog Migration", "Data Engineering"],
       } },
       { id: "permissions", label: "Permissions", col: 4, category: "governance", detail: {
@@ -285,7 +285,7 @@ export const ARCHITECTURES = [
           "Map legacy grants to Unity Catalog's three-level namespace deliberately",
           "Audit effective access after cutover, not just configured grants",
         ],
-        implementation: "Data Falcon redesigns access control around Unity Catalog's catalog-schema-table hierarchy and Azure AD groups, replacing ad-hoc legacy grants with an auditable least-privilege model.",
+        implementation: "Kaizen Agentics redesigns access control around Unity Catalog's catalog-schema-table hierarchy and Azure AD groups, replacing ad-hoc legacy grants with an auditable least-privilege model.",
         relatedServices: ["Data Governance", "Unity Catalog Migration"],
       } },
       { id: "catalog", label: "Catalog", col: 5, category: "governance", detail: {
@@ -296,7 +296,7 @@ export const ARCHITECTURES = [
           "Tag sensitive data consistently for policy enforcement",
           "Centralize catalog administration under a dedicated governance owner",
         ],
-        implementation: "Data Falcon structures Unity Catalog around business domains with consistent tagging for sensitive fields, giving every workspace a single, shared governance model.",
+        implementation: "Kaizen Agentics structures Unity Catalog around business domains with consistent tagging for sensitive fields, giving every workspace a single, shared governance model.",
         relatedServices: ["Data Governance", "Unity Catalog Migration"],
       } },
       { id: "lineage", label: "Lineage", col: 6, category: "governance", detail: {
@@ -307,7 +307,7 @@ export const ARCHITECTURES = [
           "Use lineage to assess blast radius before schema changes",
           "Surface lineage to data consumers, not just engineering",
         ],
-        implementation: "Data Falcon enables Unity Catalog's automatic lineage tracking across every pipeline and notebook, giving teams instant visibility into the impact of any proposed change.",
+        implementation: "Kaizen Agentics enables Unity Catalog's automatic lineage tracking across every pipeline and notebook, giving teams instant visibility into the impact of any proposed change.",
         relatedServices: ["Data Governance", "Unity Catalog Migration"],
       } },
       { id: "production", label: "Production", col: 7, category: "consumption", detail: {
@@ -318,7 +318,7 @@ export const ARCHITECTURES = [
           "Monitor query performance post-migration against pre-migration baselines",
           "Establish an ongoing governance review cadence, not a one-time project",
         ],
-        implementation: "Data Falcon runs a parallel validation period comparing production workloads on Unity Catalog against historical Hive Metastore baselines before formally decommissioning the legacy metastore.",
+        implementation: "Kaizen Agentics runs a parallel validation period comparing production workloads on Unity Catalog against historical Hive Metastore baselines before formally decommissioning the legacy metastore.",
         relatedServices: ["Unity Catalog Migration", "Data Governance"],
       } },
     ],
@@ -341,7 +341,7 @@ export const ARCHITECTURES = [
           "Track document versioning so answers can cite the current version",
           "Exclude documents outside their approved retention window",
         ],
-        implementation: "Data Falcon builds a document ingestion pipeline that classifies content by sensitivity and business domain before it ever reaches an embedding model.",
+        implementation: "Kaizen Agentics builds a document ingestion pipeline that classifies content by sensitivity and business domain before it ever reaches an embedding model.",
         relatedServices: ["AI Agents & LLMs", "Data Governance"],
       } },
       { id: "ocr", label: "OCR", col: 1, category: "process", detail: {
@@ -352,7 +352,7 @@ export const ARCHITECTURES = [
           "Preserve document layout and structure where it carries meaning",
           "Flag low-confidence extractions for human review",
         ],
-        implementation: "Data Falcon uses layout-aware OCR to preserve table and section structure from source documents, flagging low-confidence extractions for review before they enter the AI pipeline.",
+        implementation: "Kaizen Agentics uses layout-aware OCR to preserve table and section structure from source documents, flagging low-confidence extractions for review before they enter the AI pipeline.",
         relatedServices: ["AI Agents & LLMs", "Intelligent Document Processing"],
       } },
       { id: "embeddings", label: "Embeddings", col: 2, category: "ai", detail: {
@@ -363,7 +363,7 @@ export const ARCHITECTURES = [
           "Version embedding models so re-indexing is a controlled process",
           "Attach source metadata to every embedded chunk for citation",
         ],
-        implementation: "Data Falcon chunks documents using context-aware splitting and generates embeddings with metadata attached to every chunk, so every AI answer can be traced back to its exact source passage.",
+        implementation: "Kaizen Agentics chunks documents using context-aware splitting and generates embeddings with metadata attached to every chunk, so every AI answer can be traced back to its exact source passage.",
         relatedServices: ["AI Agents & LLMs", "AI & Machine Learning"],
       } },
       { id: "vector-db", label: "Vector Database", col: 3, category: "storage", detail: {
@@ -374,7 +374,7 @@ export const ARCHITECTURES = [
           "Monitor retrieval relevance, not just system uptime",
           "Re-index incrementally as documents change rather than in full rebuilds",
         ],
-        implementation: "Data Falcon deploys a governed vector database with retrieval-time permission filtering, so the AI agent only ever surfaces content the requesting user is authorized to see.",
+        implementation: "Kaizen Agentics deploys a governed vector database with retrieval-time permission filtering, so the AI agent only ever surfaces content the requesting user is authorized to see.",
         relatedServices: ["AI Agents & LLMs", "Data Governance"],
       } },
       { id: "llm", label: "LLM", col: 4, category: "ai", detail: {
@@ -385,7 +385,7 @@ export const ARCHITECTURES = [
           "Evaluate response quality against a labeled test set before launch",
           "Log prompts and responses for ongoing quality monitoring",
         ],
-        implementation: "Data Falcon grounds every LLM response in retrieved enterprise content via retrieval-augmented generation, with automated evaluation against a labeled question set before any model or prompt change ships.",
+        implementation: "Kaizen Agentics grounds every LLM response in retrieved enterprise content via retrieval-augmented generation, with automated evaluation against a labeled question set before any model or prompt change ships.",
         relatedServices: ["AI Agents & LLMs", "AI & Machine Learning"],
       } },
       { id: "ai-agent", label: "AI Agent", col: 5, category: "ai", detail: {
@@ -396,7 +396,7 @@ export const ARCHITECTURES = [
           "Log every tool call and decision step for auditability",
           "Set explicit fallback behavior for low-confidence situations",
         ],
-        implementation: "Data Falcon builds task-scoped AI Agents with tightly constrained tool access and full decision logging, so every automated action is explainable and auditable after the fact.",
+        implementation: "Kaizen Agentics builds task-scoped AI Agents with tightly constrained tool access and full decision logging, so every automated action is explainable and auditable after the fact.",
         relatedServices: ["AI Agents & LLMs", "AI & Machine Learning"],
       } },
       { id: "enterprise-chat", label: "Enterprise Chat", col: 6, category: "consumption", detail: {
@@ -407,7 +407,7 @@ export const ARCHITECTURES = [
           "Respect the same access controls in chat as in the source systems",
           "Collect user feedback to continuously improve retrieval quality",
         ],
-        implementation: "Data Falcon delivers Enterprise Chat with inline citations back to source documents and per-user access enforcement, so every answer is both trustworthy and traceable.",
+        implementation: "Kaizen Agentics delivers Enterprise Chat with inline citations back to source documents and per-user access enforcement, so every answer is both trustworthy and traceable.",
         relatedServices: ["AI Agents & LLMs", "Business Intelligence"],
       } },
     ],

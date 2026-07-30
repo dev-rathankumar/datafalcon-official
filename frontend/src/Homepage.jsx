@@ -1,15 +1,81 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { T } from "./theme";
 import ParticleNet from "./components/ParticleNet";
 import PageShell from "./components/PageShell";
+import WhyDatafalcon from "./components/WhyDatafalcon";
+
+const TAGLINES = [
+  "Building intelligent systems for forward-thinking businesses.",
+  "Enabling AI and analytics with modern data platforms.",
+  "Building the future of business through AI, data, and software.",
+  "Engineering scalable software and AI systems for modern enterprises.",
+];
+
+function HeroTagline() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % TAGLINES.length), 5000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div
+      className="df-hero-tagline-wrap"
+      style={{
+        maxWidth: 680,
+        width: "100%",
+        padding: 1,
+        borderRadius: 8,
+        background: "linear-gradient(135deg, rgba(0,212,255,0.55), rgba(245,166,35,0.35) 50%, rgba(180,220,255,0.3))",
+        boxShadow: "0 0 6px rgba(0,212,255,0.22), 0 0 10px rgba(245,166,35,0.12)",
+      }}
+    >
+      <div
+        className="df-hero-tagline"
+        style={{
+          minHeight: 76,
+          padding: "1.4rem 1.75rem",
+          background: T.surface,
+          borderRadius: 7,
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={index}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -28 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              margin: 0,
+              fontSize: "0.88rem",
+              color: T.muted,
+              lineHeight: 1.65,
+              fontWeight: 400,
+              maxWidth: 560,
+            }}
+          >
+            {TAGLINES[index]}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
 
 // ── SERVICE CARD ─────────────────────────────────────────────────────────────
 function SvcCard({ icon, title, desc }) {
   const [hov, setHov] = useState(false);
   return (
     <Link
-      to="/services"
+      to="/our-expertise"
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{ background: hov ? T.card2 : T.card, padding: "1.6rem 1.4rem", cursor: "pointer", transition: "background 0.2s", textDecoration: "none", color: "inherit", display: "block" }}
@@ -32,20 +98,6 @@ const SERVICES = [
   { icon: "⟳", title: "API & Automation",     desc: "Connect your tools, automate your ops, and build the infrastructure that scales without breaking." },
 ];
 
-const WHY = [
-  { n: "01", t: "Senior-only execution",        d: "Every project runs on experienced engineers. No juniors learning on your budget." },
-  { n: "02", t: "Transparent from day one",     d: "Fixed-scope contracts, milestone-based payments, weekly updates. No surprises." },
-  { n: "03", t: "India-based, globally fluent", d: "Cost-efficient without cutting corners — US-grade quality at a fraction of the cost." },
-  { n: "04", t: "AI-native from the ground up", d: "We don't bolt AI onto old workflows. Intelligence is the architecture." },
-];
-
-const STATS = [
-  { n: "50+",  l: "Global Clients" },
-  { n: "250+", l: "Projects Delivered" },
-  { n: "98%",  l: "Client Satisfaction" },
-  { n: "20+",  l: "Countries Served" },
-];
-
 // ── MAIN ─────────────────────────────────────────────────────────────────────
 export default function DatafalconHome() {
   return (
@@ -56,7 +108,7 @@ export default function DatafalconHome() {
         {/* bottom fade */}
         <div style={{ position:"absolute", bottom:0, left:0, right:0, height:100, background:`linear-gradient(transparent,${T.bg})`, pointerEvents:"none", zIndex:1 }} />
 
-        <div className="df-hero-inner" style={{ position:"relative", zIndex:2, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", width:"100%" }}>
+        <div className="df-hero-inner" style={{ position:"relative", zIndex:2, display:"flex", flexDirection:"column", alignItems:"center", textAlign:"center", width:"100%", padding:"2.5rem 2rem 0" }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"0.32rem 1rem", border:"0.5px solid rgba(0,212,255,0.25)", borderRadius:100, background:"rgba(0,212,255,0.05)", fontSize:"0.67rem", letterSpacing:"0.13em", textTransform:"uppercase", color:T.cyan, fontWeight:500, marginBottom:"1.5rem" }}>
             <span style={{ width:5, height:5, borderRadius:"50%", background:T.cyan, display:"inline-block", animation:"blink 2s infinite" }} />
             AI Solutions. Data Solutions. Real Impact.
@@ -69,7 +121,7 @@ export default function DatafalconHome() {
           </h1>
 
           <p style={{ fontSize:"0.92rem", color:T.muted, lineHeight:1.75, maxWidth:500, marginBottom:"2rem", fontWeight:300 }}>
-            We build agentic AI systems and data solutions that give your business a sharper edge — engineered in India, deployed for the world.
+            We build agentic AI systems and data solutions that give your business a sharper edge — designed for global impact.
           </p>
 
           <div className="df-hbtns" style={{ display:"flex", gap:12, alignItems:"center", justifyContent:"center", marginBottom:"2.75rem" }}>
@@ -84,14 +136,7 @@ export default function DatafalconHome() {
             </button>
           </div>
 
-          <div className="df-stats" style={{ display:"flex", border:`0.5px solid ${T.border}`, borderRadius:8, overflow:"hidden", maxWidth:680, width:"100%", background:T.surface }}>
-            {STATS.map((s, i) => (
-              <div key={s.l} className="df-stat" style={{ flex:1, padding:"1.2rem 1rem", textAlign:"center", borderRight: i < 3 ? `0.5px solid ${T.border}` : "none" }}>
-                <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"1.55rem", fontWeight:700, color:T.cyan, letterSpacing:"-0.02em" }}>{s.n}</div>
-                <div style={{ fontSize:"0.7rem", color:T.muted, marginTop:3, letterSpacing:"0.06em", textTransform:"uppercase" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
+          <HeroTagline />
         </div>
       </section>
 
@@ -108,33 +153,15 @@ export default function DatafalconHome() {
           {SERVICES.map(s => <SvcCard key={s.title} {...s} />)}
         </div>
         <div style={{ textAlign:"center", marginTop:"1.75rem" }}>
-          <Link to="/services" style={{ fontSize:"0.8rem", color:T.cyan, textDecoration:"none", display:"inline-flex", alignItems:"center", gap:6 }}>
-            View all services →
+          <Link to="/our-expertise" style={{ fontSize:"0.8rem", color:T.cyan, textDecoration:"none", display:"inline-flex", alignItems:"center", gap:6 }}>
+            View our expertise →
           </Link>
         </div>
       </section>
 
       <div style={{ height:"0.5px", background:T.border }} />
 
-      {/* WHY */}
-      <section className="df-sec" style={{ padding:"3.5rem 2rem", maxWidth:860, margin:"0 auto" }}>
-        <div style={{ textAlign:"center", marginBottom:"2rem" }}>
-          <div style={{ fontSize:"0.68rem", letterSpacing:"0.16em", textTransform:"uppercase", color:T.amber, fontWeight:600, marginBottom:8 }}>Why Datafalcon</div>
-          <h2 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(1.4rem,2.5vw,1.9rem)", fontWeight:600, letterSpacing:"-0.025em", marginBottom:8 }}>Built lean. Wired for speed.</h2>
-          <p style={{ color:T.muted, fontSize:"0.9rem", lineHeight:1.7, fontWeight:300 }}>A focused technical team — no layers of management, no inflated quotes. Just sharp execution.</p>
-        </div>
-        <div style={{ display:"grid", gap:10 }}>
-          {WHY.map(w => (
-            <div key={w.n} style={{ display:"flex", gap:14, padding:"1.2rem", border:`0.5px solid ${T.border}`, borderRadius:6, background:T.surface }}>
-              <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"0.7rem", fontWeight:700, color:T.cyan, letterSpacing:"0.1em", minWidth:28, paddingTop:2 }}>{w.n}</div>
-              <div>
-                <div style={{ fontSize:"0.9rem", fontWeight:500, marginBottom:4 }}>{w.t}</div>
-                <div style={{ fontSize:"0.8rem", color:T.muted, lineHeight:1.6 }}>{w.d}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <WhyDatafalcon />
 
       {/* CTA */}
       <div className="df-cta" style={{ margin:"0 2rem 3rem", borderRadius:10, background:T.surface, border:`0.5px solid ${T.border}`, padding:"3rem 2rem", textAlign:"center", position:"relative", overflow:"hidden" }}>
@@ -149,7 +176,7 @@ export default function DatafalconHome() {
           <button style={{ background:"transparent", border:`0.5px solid ${T.dim}`, color:T.muted, padding:"0.75rem 1.75rem", borderRadius:5, fontSize:"0.85rem", fontFamily:"Inter,sans-serif", cursor:"pointer" }}
             onMouseEnter={e=>{e.currentTarget.style.borderColor=T.muted;e.currentTarget.style.color=T.text;}}
             onMouseLeave={e=>{e.currentTarget.style.borderColor=T.dim;e.currentTarget.style.color=T.muted;}}>
-            hello@datafalcon.io
+            hello@kaizenagentics.io
           </button>
         </div>
       </div>

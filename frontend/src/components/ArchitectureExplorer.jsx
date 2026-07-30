@@ -121,7 +121,7 @@ function SidePanel({ node, onClose }) {
               ))}
             </div>
           </DetailField>
-          <DetailField label="How Data Falcon Implements It" color={T.cyan}>
+          <DetailField label="How Kaizen Agentics Implements It" color={T.cyan}>
             <p style={{ fontSize: "0.82rem", color: T.text, lineHeight: 1.65, fontWeight: 300 }}>{node.detail.implementation}</p>
           </DetailField>
           <DetailField label="Related Services" color={T.amber}>

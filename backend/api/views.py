@@ -8,6 +8,6 @@ class HomePageView(APIView):
     def get(self, request):
         return Response({
             "success": True,
-            "message": "Welcome to DataFalcon API",
+            "message": "Welcome to Kaizen Agentics API",
             "version": "1.0.0"
         })
