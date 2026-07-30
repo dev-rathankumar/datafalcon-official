@@ -5,6 +5,7 @@ import { T } from "./theme";
 import ParticleNet from "./components/ParticleNet";
 import PageShell from "./components/PageShell";
 import WhyDatafalcon from "./components/WhyDatafalcon";
+import { EXPERTISE_AREAS } from "./data/expertiseAreas";
 
 const TAGLINES = [
   "Building intelligent systems for forward-thinking businesses.",
@@ -71,11 +72,11 @@ function HeroTagline() {
 }
 
 // ── SERVICE CARD ─────────────────────────────────────────────────────────────
-function SvcCard({ icon, title, desc }) {
+function SvcCard({ icon, title, desc, slug }) {
   const [hov, setHov] = useState(false);
   return (
     <Link
-      to="/our-expertise"
+      to={`/our-expertise/${slug}`}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{ background: hov ? T.card2 : T.card, padding: "1.6rem 1.4rem", cursor: "pointer", transition: "background 0.2s", textDecoration: "none", color: "inherit", display: "block" }}
@@ -91,12 +92,12 @@ function SvcCard({ icon, title, desc }) {
 }
 
 // ── DATA ─────────────────────────────────────────────────────────────────────
-const SERVICES = [
-  { icon: "⟡", title: "Agentic AI Systems",  desc: "Autonomous AI agents that reason, plan, and act — handling complex workflows without constant human input." },
-  { icon: "◈", title: "Data Engineering",     desc: "Pipelines, warehouses, and dashboards that turn scattered data into clean, reliable business intelligence." },
-  { icon: "◉", title: "Machine Learning",     desc: "Custom ML models — trained, tuned, and deployed into production systems that actually ship." },
-  { icon: "⟳", title: "API & Automation",     desc: "Connect your tools, automate your ops, and build the infrastructure that scales without breaking." },
-];
+const SERVICES = EXPERTISE_AREAS.slice(0, 4).map((a) => ({
+  icon: a.icon,
+  title: a.title,
+  desc: a.tagline,
+  slug: a.slug,
+}));
 
 // ── MAIN ─────────────────────────────────────────────────────────────────────
 export default function DatafalconHome() {

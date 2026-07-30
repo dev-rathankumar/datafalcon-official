@@ -6,16 +6,9 @@ import { T } from "./theme";
 import PageShell from "./components/PageShell";
 import ParticleNet from "./components/ParticleNet";
 import Reveal, { RevealItem } from "./components/Reveal";
+import { EXPERTISE_AREAS } from "./data/expertiseAreas";
 
-const SERVICE_OPTIONS = [
-  "Software Development",
-  "Artificial Intelligence",
-  "AI Workflow Automation",
-  "Data Engineering",
-  "Databricks Consulting",
-  "Cloud Solutions",
-  "Other",
-];
+const SERVICE_OPTIONS = EXPERTISE_AREAS.map((a) => a.title).concat(["Other"]);
 
 const BUDGET_OPTIONS = [
   "Less than $10K",

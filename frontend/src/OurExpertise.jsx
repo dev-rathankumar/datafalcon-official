@@ -1,65 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { T } from "./theme";
 import PageShell from "./components/PageShell";
 import ParticleNet from "./components/ParticleNet";
-
-const EXPERTISE = [
-  {
-    icon: "◈",
-    title: "Azure Databricks & Data Engineering",
-    desc: "End-to-end data platforms built on Azure Databricks — ingestion, transformation, and governance at scale.",
-    bullets: [
-      "Medallion architecture (bronze / silver / gold) pipelines on Delta Lake",
-      "Spark-based ETL/ELT for batch and streaming workloads",
-      "Lakehouse design, orchestration & warehousing (ADF, Airflow, Unity Catalog)",
-      "BI-ready datasets and dashboards for Power BI, Looker & Tableau",
-    ],
-  },
-  {
-    icon: "⟡",
-    title: "Agentic AI Applications",
-    desc: "Autonomous AI agents that reason, plan, and take action across your workflows — not just chatbots.",
-    bullets: [
-      "Multi-agent orchestration for complex, multi-step business processes",
-      "Tool-using agents wired directly into your internal systems & APIs",
-      "RAG pipelines and knowledge-grounded reasoning",
-      "Human-in-the-loop guardrails for safe, auditable autonomy",
-    ],
-  },
-  {
-    icon: "⟳",
-    title: "Automations",
-    desc: "We eliminate manual busywork by wiring your tools together into automated, self-running workflows.",
-    bullets: [
-      "Workflow automation across CRMs, ERPs & internal tools",
-      "Event-driven pipelines that trigger on real business events",
-      "Document, email, and reporting automation",
-      "Legacy manual-process modernization",
-    ],
-  },
-  {
-    icon: "⇄",
-    title: "API Development",
-    desc: "Secure, well-documented APIs that connect your products, partners, and internal services.",
-    bullets: [
-      "REST & GraphQL API design and development",
-      "Third-party integrations & webhook infrastructure",
-      "Authentication, rate-limiting & versioning built-in",
-      "OpenAPI documentation & client SDK generation",
-    ],
-  },
-  {
-    icon: "◉",
-    title: "Machine Learning Models",
-    desc: "Custom ML models — from prototype to production — tuned for your data and deployed to scale.",
-    bullets: [
-      "Predictive models: forecasting, classification & scoring",
-      "Model training, evaluation & hyperparameter tuning",
-      "MLOps: CI/CD for models, monitoring & retraining",
-      "Deployment as APIs, batch jobs, or embedded services",
-    ],
-  },
-];
+import { EXPERTISE_AREAS } from "./data/expertiseAreas";
 
 const PROCESS = [
   { n: "01", t: "Discover", d: "We scope the problem, your data, and your constraints before writing a line of code." },
@@ -68,25 +12,37 @@ const PROCESS = [
   { n: "04", t: "Deploy & Support", d: "We ship to production and stay on to monitor, tune, and extend." },
 ];
 
-function ExpertiseCard({ icon, title, desc, bullets }) {
+function ExpertiseCard({ slug, icon, title, tagline, image }) {
+  const [hov, setHov] = useState(false);
+
   return (
-    <div style={{ background: T.surface, border: `0.5px solid ${T.border}`, borderRadius: 10, padding: "1.75rem 1.6rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <div style={{ width: 42, height: 42, borderRadius: 8, background: "rgba(0,212,255,0.08)", border: "0.5px solid rgba(0,212,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.25rem", color: T.cyan }}>
-        {icon}
+    <Link
+      to={`/our-expertise/${slug}`}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        background: hov ? T.card2 : T.card,
+        border: `0.5px solid ${hov ? "rgba(0,212,255,0.2)" : T.border}`,
+        borderRadius: 14,
+        overflow: "hidden",
+        textDecoration: "none",
+        color: "inherit",
+        display: "flex",
+        flexDirection: "column",
+        transition: "border-color 0.2s, background 0.2s, transform 0.2s",
+        transform: hov ? "translateY(-3px)" : "none",
+      }}
+    >
+      <img src={image} alt={title} style={{ width: "100%", height: 160, objectFit: "cover", opacity: hov ? 1 : 0.85, transition: "opacity 0.2s" }} />
+      <div style={{ padding: "1.4rem 1.35rem", flex: 1, display: "flex", flexDirection: "column", textAlign: "left" }}>
+        <div style={{ width: 38, height: 38, borderRadius: 8, background: "rgba(0,212,255,0.08)", border: "0.5px solid rgba(0,212,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", marginBottom: "0.85rem", color: T.cyan }}>
+          {icon}
+        </div>
+        <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "0.95rem", fontWeight: 600, marginBottom: 6, color: T.text }}>{title}</div>
+        <div style={{ fontSize: "0.8rem", color: T.muted, lineHeight: 1.6, marginBottom: 10, flex: 1 }}>{tagline}</div>
+        <div style={{ fontSize: "0.72rem", color: T.cyan }}>Learn more →</div>
       </div>
-      <div>
-        <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "1.05rem", fontWeight: 600, marginBottom: 6, color: T.text }}>{title}</div>
-        <div style={{ fontSize: "0.85rem", color: T.muted, lineHeight: 1.65 }}>{desc}</div>
-      </div>
-      <div style={{ display: "grid", gap: 8, marginTop: 2 }}>
-        {bullets.map((b) => (
-          <div key={b} style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: "0.8rem", color: T.muted, lineHeight: 1.55 }}>
-            <span style={{ color: T.cyan, marginTop: 2, flexShrink: 0 }}>›</span>
-            <span>{b}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+    </Link>
   );
 }
 
@@ -112,9 +68,9 @@ export default function OurExpertise() {
 
       <div style={{ height: "0.5px", background: T.border }} />
 
-      <section className="df-sec" style={{ padding: "3.5rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
-        <div className="df-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 16 }}>
-          {EXPERTISE.map((s) => <ExpertiseCard key={s.title} {...s} />)}
+      <section className="df-sec" style={{ padding: "3.5rem 2rem", maxWidth: 1080, margin: "0 auto" }}>
+        <div className="df-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+          {EXPERTISE_AREAS.map((s) => <ExpertiseCard key={s.slug} {...s} />)}
         </div>
       </section>
 

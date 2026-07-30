@@ -61,6 +61,7 @@ export default function GlobalStyles() {
       #contact-form {
         scroll-margin-top: 3.5rem;
       }
+      .df-expertise-trigger:hover { color: #f5a623 !important; }
       .df-a { font-size:0.78rem; color:#7a9bb5; text-decoration:none; transition:color 0.2s; }
       .df-a:hover { color:#e8f4fd; }
       .df-a.active { color:#00d4ff; }
@@ -72,6 +73,7 @@ export default function GlobalStyles() {
         .df-hero-inner { padding:2.5rem 1.25rem 2rem !important; }
         .df-svc-grid { grid-template-columns:1fr !important; }
         .df-services-grid { grid-template-columns:1fr !important; }
+        .df-expertise-grid { grid-template-columns:1fr !important; }
         .df-sec { padding:2.5rem 1.25rem !important; }
         .df-page-hero { padding:2.5rem 1.25rem 2rem !important; }
         .df-hero-tagline { padding:1.15rem 1.25rem !important; min-height:68px !important; }
@@ -92,6 +94,13 @@ export default function GlobalStyles() {
         .df-delivery-grid { grid-template-columns:1fr !important; }
         .df-why { padding:3.5rem 1.25rem !important; }
         .df-why-grid { grid-template-columns:1fr !important; gap:1rem !important; }
+        .df-expertise-mega {
+          width: calc(100vw - 2.5rem) !important;
+          margin-left: 0 !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+        }
+        .df-expertise-mega-grid { grid-template-columns: 1fr !important; }
         .df-contact-grid { grid-template-columns:1fr !important; gap:2.5rem !important; }
         .df-contact-form-row { grid-template-columns:1fr !important; }
         .df-contact-steps { grid-template-columns:1fr !important; }

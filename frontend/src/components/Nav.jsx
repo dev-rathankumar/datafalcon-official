@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { T } from "../theme";
+import ExpertiseNavMenu from "./ExpertiseNavMenu";
 
 const NAV_LINKS = [
-  { label: "Our Expertise", to: "/our-expertise" },
   { label: "Our Work", to: "/our-work" },
   { label: "About Us", to: "#" },
   { label: "Contact", to: "/contact" },
@@ -18,7 +18,8 @@ export default function Nav() {
         </svg>
         <span style={{ color:T.text }}>Kaizen</span><span style={{ color:T.cyan }}> Agentics</span>
       </Link>
-      <div className="df-nav-links" style={{ display:"flex", gap:"1.75rem" }}>
+      <div className="df-nav-links" style={{ display:"flex", gap:"1.75rem", alignItems:"center" }}>
+        <ExpertiseNavMenu />
         {NAV_LINKS.map(l => (
           l.to === "#" ? (
             <a key={l.label} href="#" className="df-a">{l.label}</a>
