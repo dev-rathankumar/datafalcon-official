@@ -4,7 +4,7 @@ import ExpertiseNavMenu from "./ExpertiseNavMenu";
 
 const NAV_LINKS = [
   { label: "Our Work", to: "/our-work" },
-  { label: "About Us", to: "#" },
+  { label: "About Us", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
 

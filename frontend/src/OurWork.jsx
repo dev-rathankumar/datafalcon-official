@@ -4,7 +4,6 @@ import { T } from "./theme";
 import PageShell from "./components/PageShell";
 import ParticleNet from "./components/ParticleNet";
 import Reveal, { RevealItem } from "./components/Reveal";
-import AnimatedCounter from "./components/AnimatedCounter";
 import PrimaryButton from "./components/PrimaryButton";
 import SecondaryButton from "./components/SecondaryButton";
 import ArchitectureExplorer from "./components/ArchitectureExplorer";
@@ -34,25 +33,6 @@ const DELIVERY_PHASES = [
   { n: "04", t: "Validate", d: "Quality, performance, and security testing.", expanded: "Every pipeline is tested for data quality, performance under load, and security before it ever touches production data." },
   { n: "05", t: "Deploy", d: "Production rollout with monitoring in place.", expanded: "We roll out to production with monitoring, alerting, and rollback plans already in place, not bolted on after an incident." },
   { n: "06", t: "Optimize", d: "Ongoing tuning and platform evolution.", expanded: "Post-launch, we continuously tune performance and cost, and evolve the platform as your data and business needs grow." },
-];
-
-const OUTCOME_STATS = [
-  { n: "100+", l: "Enterprise Pipelines Delivered" },
-  { n: "20+", l: "Cloud Platforms Supported" },
-  { n: "Millions", l: "Records Processed" },
-  { n: "99.9%", l: "Pipeline Reliability" },
-  { n: "24/7", l: "Enterprise-Ready Support" },
-];
-
-const PILLARS = [
-  { t: "Enterprise Architecture", d: "Platforms designed to scale across business units, not just one team." },
-  { t: "Senior Consultants", d: "Every engagement staffed by engineers who've shipped enterprise platforms before." },
-  { t: "Cloud Modernization", d: "Legacy systems modernized onto Azure without disrupting the business." },
-  { t: "AI Integration", d: "Governed, well-modeled data that's actually usable by AI and agents." },
-  { t: "Governance", d: "Unity Catalog and access controls built in from day one, not bolted on." },
-  { t: "Performance", d: "Pipelines and platforms tuned for the data volumes enterprises actually run." },
-  { t: "Security", d: "Least-privilege access and full audit trails across every layer of the platform." },
-  { t: "Scalability", d: "Architected for growth in data volume, users, and use cases from day one." },
 ];
 
 // ── SHARED BITS ──────────────────────────────────────────────────────────────
@@ -369,62 +349,7 @@ export default function OurWork() {
         </Reveal>
       </section>
 
-      <div style={{ height: "0.5px", background: T.border }} />
-
-      {/* SECTION 7 — BUSINESS OUTCOMES */}
-      <section className="df-sec" style={{ padding: "3.5rem 2rem", maxWidth: 1080, margin: "0 auto" }}>
-        <Reveal direction="up">
-          <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
-            <Eyebrow>Business Outcomes</Eyebrow>
-            <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 600, letterSpacing: "-0.025em", marginBottom: 8 }}>
-              Results measured in production
-            </h2>
-          </div>
-        </Reveal>
-        <Reveal direction="scale">
-          <div className="df-stats" style={{ display: "flex", border: `0.5px solid ${T.border}`, borderRadius: 8, overflow: "hidden", background: T.surface }}>
-            {OUTCOME_STATS.map((s, i) => (
-              <div key={s.l} className="df-stat" style={{ flex: 1, padding: "1.4rem 1rem", textAlign: "center", borderRight: i < OUTCOME_STATS.length - 1 ? `0.5px solid ${T.border}` : "none" }}>
-                <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "1.7rem", fontWeight: 700, color: T.cyan, letterSpacing: "-0.02em" }}>
-                  <AnimatedCounter value={s.n} />
-                </div>
-                <div style={{ fontSize: "0.7rem", color: T.muted, marginTop: 3, letterSpacing: "0.06em", textTransform: "uppercase" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      <div style={{ height: "0.5px", background: T.border }} />
-
-      {/* SECTION 8 — WHY ENTERPRISES CHOOSE DATA FALCON */}
-      <section className="df-sec" style={{ padding: "3.5rem 2rem", maxWidth: 1080, margin: "0 auto" }}>
-        <Reveal direction="up">
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <Eyebrow>Why Kaizen Agentics</Eyebrow>
-            <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.4rem,2.5vw,1.9rem)", fontWeight: 600, letterSpacing: "-0.025em", marginBottom: 8 }}>
-              Why Enterprises Choose Kaizen Agentics
-            </h2>
-            <p style={{ color: T.muted, fontSize: "0.9rem", lineHeight: 1.7, fontWeight: 300 }}>
-              The same discipline behind every platform we deliver.
-            </p>
-          </div>
-        </Reveal>
-        <Reveal direction="up" stagger={0.06}>
-          <div className="df-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
-            {PILLARS.map(p => (
-              <RevealItem key={p.t}>
-                <div style={{ padding: "1.1rem 1rem", border: `0.5px solid ${T.border}`, borderRadius: 8, background: T.surface, height: "100%" }}>
-                  <div style={{ fontSize: "0.85rem", fontWeight: 600, color: T.text, marginBottom: 6 }}>{p.t}</div>
-                  <div style={{ fontSize: "0.76rem", color: T.muted, lineHeight: 1.55 }}>{p.d}</div>
-                </div>
-              </RevealItem>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      {/* SECTION 9 — FINAL CTA */}
+      {/* FINAL CTA */}
       <Reveal direction="scale">
         <div className="df-cta" style={{ margin: "0 2rem 3rem", borderRadius: 10, background: T.surface, border: `0.5px solid ${T.border}`, padding: "3rem 2rem", textAlign: "center", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 200, height: 1, background: T.cyan, opacity: 0.4 }} />

@@ -4,6 +4,7 @@ import OurExpertise from "./OurExpertise";
 import ExpertiseDetail from "./ExpertiseDetail";
 import OurWork from "./OurWork";
 import Contact from "./Contact";
+import About from "./About";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/industries" element={<Navigate to="/" replace />} />
         <Route path="/our-work" element={<OurWork />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );

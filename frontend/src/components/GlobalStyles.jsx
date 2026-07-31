@@ -105,6 +105,9 @@ export default function GlobalStyles() {
         .df-contact-form-row { grid-template-columns:1fr !important; }
         .df-contact-steps { grid-template-columns:1fr !important; }
         .df-contact-main { padding:3rem 1.25rem !important; }
+        .df-team-row { flex-direction:column !important; }
+        .df-team-photo { flex: none !important; width:100% !important; min-height:280px !important; }
+        .df-team-content { padding:1.5rem !important; }
       }
     `}</style>
   );

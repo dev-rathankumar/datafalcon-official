@@ -7,6 +7,7 @@ import PageShell from "./components/PageShell";
 import ParticleNet from "./components/ParticleNet";
 import Reveal, { RevealItem } from "./components/Reveal";
 import { EXPERTISE_AREAS } from "./data/expertiseAreas";
+import { submitContactInquiry } from "./api";
 
 const SERVICE_OPTIONS = EXPERTISE_AREAS.map((a) => a.title).concat(["Other"]);
 
@@ -155,11 +156,35 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [btnHover, setBtnHover] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!agreed) return;
-    setSubmitted(true);
+    if (!agreed || submitting) return;
+
+    const form = e.target;
+    const payload = {
+      full_name: form.name.value,
+      company: form.company.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      country: form.country.value,
+      service: form.service.value,
+      budget: form.budget.value,
+      details: form.details.value,
+    };
+
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitContactInquiry(payload);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -298,14 +323,18 @@ export default function Contact() {
                     </span>
                   </label>
 
+                  {error && (
+                    <p style={{ fontSize: "0.8rem", color: "#f5a623", margin: 0, textAlign: "left" }}>{error}</p>
+                  )}
+
                   <motion.button
                     type="submit"
-                    disabled={!agreed}
+                    disabled={!agreed || submitting}
                     onMouseEnter={() => setBtnHover(true)}
                     onMouseLeave={() => setBtnHover(false)}
                     animate={{
-                      y: btnHover && agreed ? -2 : 0,
-                      boxShadow: btnHover && agreed ? "0 8px 28px rgba(0,212,255,0.25)" : "0 2px 12px rgba(0,212,255,0.1)",
+                      y: btnHover && agreed && !submitting ? -2 : 0,
+                      boxShadow: btnHover && agreed && !submitting ? "0 8px 28px rgba(0,212,255,0.25)" : "0 2px 12px rgba(0,212,255,0.1)",
                     }}
                     transition={{ duration: 0.25 }}
                     style={{
@@ -313,12 +342,12 @@ export default function Contact() {
                       padding: "0.85rem 1.5rem",
                       borderRadius: 10,
                       border: "none",
-                      background: agreed ? T.cyan : "rgba(0,212,255,0.25)",
+                      background: agreed && !submitting ? T.cyan : "rgba(0,212,255,0.25)",
                       color: "#050a12",
                       fontSize: "0.88rem",
                       fontFamily: "Inter,sans-serif",
                       fontWeight: 600,
-                      cursor: agreed ? "pointer" : "not-allowed",
+                      cursor: agreed && !submitting ? "pointer" : "not-allowed",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -326,7 +355,7 @@ export default function Contact() {
                     }}
                   >
                     <Send size={16} strokeWidth={2} />
-                    Send Inquiry
+                    {submitting ? "Sending..." : "Send Inquiry"}
                   </motion.button>
                 </form>
               )}
