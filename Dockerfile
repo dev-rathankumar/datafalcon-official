@@ -11,7 +11,5 @@ COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ ./
 COPY --from=frontend-build /frontend/dist /frontend/dist
-RUN python manage.py collectstatic --noinput
 
-CMD sh -c "python manage.py migrate && gunicorn datafalcon_main.wsgi --bind 0.0.0.0:$PORT --log-file -"
-
+CMD sh -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn datafalcon_main.wsgi --bind 0.0.0.0:$PORT --log-file -"
