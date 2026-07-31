@@ -8,6 +8,7 @@ import ParticleNet from "./components/ParticleNet";
 import Reveal, { RevealItem } from "./components/Reveal";
 import { EXPERTISE_AREAS } from "./data/expertiseAreas";
 import { submitContactInquiry } from "./api";
+import CountrySelect from "./components/CountrySelect";
 
 const SERVICE_OPTIONS = EXPERTISE_AREAS.map((a) => a.title).concat(["Other"]);
 
@@ -23,8 +24,8 @@ const INFO_CARDS = [
   {
     icon: Mail,
     title: "Email",
-    lines: ["contact@kaizenagentics.io"],
-    href: "mailto:contact@kaizenagentics.io",
+    lines: ["support@kaizenagentics.com"],
+    href: "mailto:support@kaizenagentics.com",
   },
   {
     icon: Clock,
@@ -154,14 +155,19 @@ function FormField({ label, required, children }) {
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [agreed, setAgreed] = useState(false);
+  const [country, setCountry] = useState(null);
   const [btnHover, setBtnHover] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!agreed || submitting) return;
+    if (submitting) return;
+
+    if (!country?.name) {
+      setError("Please select a country.");
+      return;
+    }
 
     const form = e.target;
     const payload = {
@@ -169,7 +175,7 @@ export default function Contact() {
       company: form.company.value,
       email: form.email.value,
       phone: form.phone.value,
-      country: form.country.value,
+      country: country?.name || "",
       service: form.service.value,
       budget: form.budget.value,
       details: form.details.value,
@@ -278,7 +284,12 @@ export default function Contact() {
                   </div>
 
                   <FormField label="Country" required>
-                    <input className="df-input" type="text" name="country" required style={fieldStyle} placeholder="United States" />
+                    <CountrySelect
+                      value={country}
+                      onChange={setCountry}
+                      required
+                      inputStyle={fieldStyle}
+                    />
                   </FormField>
 
                   <div className="df-contact-form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
@@ -311,30 +322,18 @@ export default function Contact() {
                     />
                   </FormField>
 
-                  <label style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer", textAlign: "left" }}>
-                    <input
-                      type="checkbox"
-                      checked={agreed}
-                      onChange={(e) => setAgreed(e.target.checked)}
-                      style={{ marginTop: 3, accentColor: T.cyan }}
-                    />
-                    <span style={{ fontSize: "0.78rem", color: T.muted, lineHeight: 1.55 }}>
-                      I agree to be contacted regarding my inquiry.
-                    </span>
-                  </label>
-
                   {error && (
                     <p style={{ fontSize: "0.8rem", color: "#f5a623", margin: 0, textAlign: "left" }}>{error}</p>
                   )}
 
                   <motion.button
                     type="submit"
-                    disabled={!agreed || submitting}
+                    disabled={submitting}
                     onMouseEnter={() => setBtnHover(true)}
                     onMouseLeave={() => setBtnHover(false)}
                     animate={{
-                      y: btnHover && agreed && !submitting ? -2 : 0,
-                      boxShadow: btnHover && agreed && !submitting ? "0 8px 28px rgba(0,212,255,0.25)" : "0 2px 12px rgba(0,212,255,0.1)",
+                      y: btnHover && !submitting ? -2 : 0,
+                      boxShadow: btnHover && !submitting ? "0 8px 28px rgba(0,212,255,0.25)" : "0 2px 12px rgba(0,212,255,0.1)",
                     }}
                     transition={{ duration: 0.25 }}
                     style={{
@@ -342,12 +341,12 @@ export default function Contact() {
                       padding: "0.85rem 1.5rem",
                       borderRadius: 10,
                       border: "none",
-                      background: agreed && !submitting ? T.cyan : "rgba(0,212,255,0.25)",
+                      background: !submitting ? T.cyan : "rgba(0,212,255,0.25)",
                       color: "#050a12",
                       fontSize: "0.88rem",
                       fontFamily: "Inter,sans-serif",
                       fontWeight: 600,
-                      cursor: agreed && !submitting ? "pointer" : "not-allowed",
+                      cursor: !submitting ? "pointer" : "not-allowed",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

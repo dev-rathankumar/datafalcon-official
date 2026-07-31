@@ -104,8 +104,8 @@ export default function OurExpertise() {
           <Link to="/contact" style={{ background: T.cyan, border: "none", color: "#050a12", padding: "0.75rem 1.75rem", borderRadius: 5, fontSize: "0.85rem", fontFamily: "Inter,sans-serif", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
             Book a Discovery Call
           </Link>
-          <a href="mailto:contact@kaizenagentics.io" style={{ background: "transparent", border: `0.5px solid ${T.dim}`, color: T.muted, padding: "0.75rem 1.75rem", borderRadius: 5, fontSize: "0.85rem", fontFamily: "Inter,sans-serif", cursor: "pointer", textDecoration: "none" }}>
-            contact@kaizenagentics.io
+          <a href="mailto:support@kaizenagentics.com" style={{ background: "transparent", border: `0.5px solid ${T.dim}`, color: T.muted, padding: "0.75rem 1.75rem", borderRadius: 5, fontSize: "0.85rem", fontFamily: "Inter,sans-serif", cursor: "pointer", textDecoration: "none" }}>
+            support@kaizenagentics.com
           </a>
         </div>
       </div>

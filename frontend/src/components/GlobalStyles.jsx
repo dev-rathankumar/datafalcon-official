@@ -57,6 +57,8 @@ export default function GlobalStyles() {
       }
       .df-input::placeholder { color: rgba(122,155,181,0.45); }
       select.df-input option { background: #0a1422; color: #e8f4fd; }
+      .df-country-list::-webkit-scrollbar { width: 6px; }
+      .df-country-list::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.2); border-radius: 3px; }
       html { scroll-padding-top: 0rem; }
       #contact-form {
         scroll-margin-top: 3.5rem;
