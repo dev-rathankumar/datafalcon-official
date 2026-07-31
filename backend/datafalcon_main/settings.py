@@ -179,6 +179,10 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
     ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
 }
 
 # Default primary key field type
@@ -196,7 +200,26 @@ CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in config(
         "CSRF_TRUSTED_ORIGINS",
-        default="http://localhost:5173,http://127.0.0.1:5173",
+        default="http://localhost:5173,http://127.0.0.1:5173,http://localhost:8000,http://127.0.0.1:8000",
     ).split(",")
     if origin.strip()
 ]
+
+
+def _append_origin(origins, origin):
+    origin = (origin or "").strip()
+    if origin and origin not in origins:
+        origins.append(origin)
+
+
+if _railway_domain:
+    _append_origin(CSRF_TRUSTED_ORIGINS, f"https://{_railway_domain}")
+    _append_origin(CORS_ALLOWED_ORIGINS, f"https://{_railway_domain}")
+
+for _host in _allowed_hosts:
+    if _host in ("localhost", "127.0.0.1"):
+        _append_origin(CSRF_TRUSTED_ORIGINS, f"http://{_host}:8000")
+        _append_origin(CORS_ALLOWED_ORIGINS, f"http://{_host}:8000")
+    elif _host != "*":
+        _append_origin(CSRF_TRUSTED_ORIGINS, f"https://{_host}")
+        _append_origin(CORS_ALLOWED_ORIGINS, f"https://{_host}")
