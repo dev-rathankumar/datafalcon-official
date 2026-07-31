@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import resend
 
 from .models import TeamMember
 from .serializers import ContactInquirySerializer, TeamMemberSerializer
@@ -57,10 +58,11 @@ class ContactInquiryView(APIView):
             f"Budget: {inquiry.budget}\n\n"
             f"Project Details:\n{inquiry.details}\n"
         )
-        send_mail(
-            subject=subject,
-            message=body,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[recipient],
-            fail_silently=False,
-        )
+
+        resend.api_key = settings.RESEND_API_KEY
+        resend.Emails.send({
+            "from": settings.DEFAULT_FROM_EMAIL,
+            "to": [recipient],
+            "subject": subject,
+            "text": body,
+        })

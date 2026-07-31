@@ -223,3 +223,6 @@ for _host in _allowed_hosts:
     elif _host != "*":
         _append_origin(CSRF_TRUSTED_ORIGINS, f"https://{_host}")
         _append_origin(CORS_ALLOWED_ORIGINS, f"https://{_host}")
+
+
+RESEND_API_KEY = config("RESEND_API_KEY", default="")
