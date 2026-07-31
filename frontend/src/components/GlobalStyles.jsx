@@ -67,8 +67,14 @@ export default function GlobalStyles() {
       .df-a.active { color:#00d4ff; }
       .df-fa { font-size:0.75rem; color:#2a4a6a; text-decoration:none; }
       .df-fa:hover { color:#7a9bb5; }
+      .df-nav-hamburger { display:none; align-items:center; justify-content:center; background:transparent; border:0.5px solid #2a4a6a; border-radius:8px; width:38px; height:38px; color:#7a9bb5; cursor:pointer; padding:0; }
+      .df-nav-hamburger:hover { border-color:#00d4ff; color:#00d4ff; }
+      .df-mobile-link.active { color: #00d4ff !important; }
       @media (max-width:768px) {
         .df-nav-links { display:none !important; }
+        .df-nav-cta { display:none !important; }
+        .df-nav-hamburger { display:flex !important; }
+        nav { padding:1rem 1.25rem !important; }
         .df-hero { height:auto !important; min-height:580px !important; }
         .df-hero-inner { padding:2.5rem 1.25rem 2rem !important; }
         .df-svc-grid { grid-template-columns:1fr !important; }
