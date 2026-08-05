@@ -105,6 +105,9 @@ export default function About() {
       .finally(() => setLoading(false));
   }, []);
 
+  const membersWithPhotos = members.filter((member) => member.photo_url);
+  const showTeamSection = !loading && !error && membersWithPhotos.length > 0;
+
   return (
     <PageShell>
       <section style={{ position: "relative", overflow: "hidden", minHeight: 340, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -131,42 +134,38 @@ export default function About() {
             Our Mission
           </h2>
           <p style={{ fontSize: "0.92rem", color: T.muted, lineHeight: 1.8, fontWeight: 300, marginBottom: 16 }}>
-            We believe technology should create clarity, not complexity. Our team partners with forward-thinking organizations to design and deliver AI-native solutions — from autonomous agent systems to enterprise data platforms — that are built to scale, govern, and perform in production.
+            We believe technology should create clarity, not complexity. We are a forward-thinking team of software engineers, AI specialists, and data architects who design and deliver intelligent systems, from autonomous agent platforms to enterprise data solutions built to scale, govern, and perform in production.
           </p>
           <p style={{ fontSize: "0.92rem", color: T.muted, lineHeight: 1.8, fontWeight: 300 }}>
-            Every engagement is led by experienced engineers who bring deep expertise in AI, cloud architecture, and software engineering to help clients move faster with confidence.
+            Every engagement is led by experienced engineers who bring deep expertise in AI, cloud architecture, and software engineering, helping organizations move faster with confidence.
           </p>
         </Reveal>
       </section>
 
-      <div style={{ height: "0.5px", background: T.border }} />
+      {showTeamSection && (
+        <>
+          <div style={{ height: "0.5px", background: T.border }} />
 
-      <section className="df-sec" style={{ padding: "4rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
-        <Reveal style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-          <div style={{ fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase", color: T.amber, fontWeight: 600, marginBottom: 8 }}>
-            Leadership
-          </div>
-          <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.3rem,2.5vw,1.75rem)", fontWeight: 600, letterSpacing: "-0.025em", color: T.text }}>
-            Meet the Team
-          </h2>
-        </Reveal>
+          <section className="df-sec" style={{ padding: "4rem 2rem", maxWidth: 1000, margin: "0 auto" }}>
+            <Reveal style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+              <div style={{ fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase", color: T.amber, fontWeight: 600, marginBottom: 8 }}>
+                Leadership
+              </div>
+              <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.3rem,2.5vw,1.75rem)", fontWeight: 600, letterSpacing: "-0.025em", color: T.text }}>
+                Meet the Team
+              </h2>
+            </Reveal>
 
-        {loading && (
-          <p style={{ color: T.muted, fontSize: "0.9rem" }}>Loading team...</p>
-        )}
-        {error && (
-          <p style={{ color: T.amber, fontSize: "0.9rem" }}>{error}</p>
-        )}
-        {!loading && !error && (
-          <Reveal stagger={0.1}>
-            <div className="df-about-grid" style={{ display: "grid", gap: 24 }}>
-              {members.map((member, index) => (
-                <TeamCard key={member.id} member={member} index={index} />
-              ))}
-            </div>
-          </Reveal>
-        )}
-      </section>
+            <Reveal stagger={0.1}>
+              <div className="df-about-grid" style={{ display: "grid", gap: 24 }}>
+                {membersWithPhotos.map((member, index) => (
+                  <TeamCard key={member.id} member={member} index={index} />
+                ))}
+              </div>
+            </Reveal>
+          </section>
+        </>
+      )}
 
       <div className="df-cta" style={{ margin: "0 2rem 3rem", borderRadius: 14, background: T.surface, border: `0.5px solid ${T.border}`, padding: "3rem 2rem", textAlign: "center" }}>
         <h2 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: "clamp(1.2rem,2.2vw,1.65rem)", fontWeight: 600, letterSpacing: "-0.025em", marginBottom: 10, color: T.text }}>

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { T } from "../theme";
 
 const FOOTER_LINKS = [
-  { label: "Privacy", to: "/privacy" },
-  { label: "Terms", to: "/terms" },
+  { label: "Privacy Policy", to: "/privacy" },
+  { label: "Terms & Conditions", to: "/terms" },
   { label: "Contact", to: "/contact" },
 ];
 

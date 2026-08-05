@@ -60,7 +60,7 @@ export default function LegalPage({ title, children }) {
           {title}
         </h1>
         <p style={{ fontSize: "0.82rem", color: T.dim, marginBottom: "2.5rem" }}>
-          Last updated: August 5, 2026
+          Last updated: December 15, 2025
         </p>
         {children}
         <div style={{ marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: `0.5px solid ${T.border}` }}>
