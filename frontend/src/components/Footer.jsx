@@ -1,15 +1,22 @@
+import { Link } from "react-router-dom";
 import { T } from "../theme";
+
+const FOOTER_LINKS = [
+  { label: "Privacy", to: "/privacy" },
+  { label: "Terms", to: "/terms" },
+  { label: "Contact", to: "/contact" },
+];
 
 export default function Footer() {
   return (
     <footer style={{ borderTop:`0.5px solid ${T.border}`, padding:"1.5rem 2rem" }}>
       <div className="df-fi" style={{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
-        <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"1rem", fontWeight:700 }}>
+        <Link to="/" style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"1rem", fontWeight:700, textDecoration:"none", color:"inherit" }}>
           Kaizen<span style={{ color:T.cyan }}> Agentics</span>
-        </div>
+        </Link>
         <div style={{ display:"flex", gap:"1.5rem" }}>
-          {["Privacy","Terms","Contact","LinkedIn"].map(l => (
-            <a key={l} href="#" className="df-fa">{l}</a>
+          {FOOTER_LINKS.map(({ label, to }) => (
+            <Link key={label} to={to} className="df-fa">{label}</Link>
           ))}
         </div>
         <div style={{ fontSize:"0.72rem", color:T.dim }}>© 2026 Kaizen Agentics.</div>

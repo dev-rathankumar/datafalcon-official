@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { T } from "./theme";
 import PageShell from "./components/PageShell";
@@ -182,6 +183,7 @@ function DeliveryPhaseCard({ phase, index, expanded, onEnter, onLeave, onToggle 
 // ── MAIN ─────────────────────────────────────────────────────────────────────
 export default function OurWork() {
   const [deliveryExpanded, setDeliveryExpanded] = useState(null);
+  const navigate = useNavigate();
 
   function scrollToExplorer() {
     document.getElementById("architecture-explorer")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -213,7 +215,7 @@ export default function OurWork() {
           <Reveal direction="up" delay={0.24}>
             <div className="df-hbtns" style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
               <PrimaryButton onClick={scrollToExplorer}>Explore Our Work</PrimaryButton>
-              <SecondaryButton>Book Consultation</SecondaryButton>
+              <SecondaryButton onClick={() => navigate("/contact")}>Book Consultation</SecondaryButton>
             </div>
           </Reveal>
         </div>
@@ -361,8 +363,8 @@ export default function OurWork() {
             Tell us about your data and your goals. We'll respond within 48 hours with a clear plan.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <PrimaryButton>Book Consultation</PrimaryButton>
-            <SecondaryButton>Talk to an Expert</SecondaryButton>
+            <PrimaryButton onClick={() => navigate("/contact")}>Book Consultation</PrimaryButton>
+            <SecondaryButton onClick={() => navigate("/contact")}>Talk to an Expert</SecondaryButton>
           </div>
         </div>
       </Reveal>

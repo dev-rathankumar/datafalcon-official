@@ -126,15 +126,13 @@ export default function DatafalconHome() {
           </p>
 
           <div className="df-hbtns" style={{ display:"flex", gap:12, alignItems:"center", justifyContent:"center", marginBottom:"2.75rem" }}>
-            <button style={{ background:T.cyan, border:"none", color:"#050a12", padding:"0.72rem 1.6rem", borderRadius:5, fontSize:"0.83rem", fontFamily:"Inter,sans-serif", fontWeight:600, cursor:"pointer" }}>
+            <Link to="/contact" style={{ background:T.cyan, border:"none", color:"#050a12", padding:"0.72rem 1.6rem", borderRadius:5, fontSize:"0.83rem", fontFamily:"Inter,sans-serif", fontWeight:600, cursor:"pointer", textDecoration:"none" }}>
               Start a Project
-            </button>
-            <button style={{ background:"transparent", border:`0.5px solid ${T.dim}`, color:T.muted, padding:"0.72rem 1.6rem", borderRadius:5, fontSize:"0.83rem", fontFamily:"Inter,sans-serif", cursor:"pointer", display:"flex", alignItems:"center", gap:8 }}
-              onMouseEnter={e=>{e.currentTarget.style.borderColor=T.muted;e.currentTarget.style.color=T.text;}}
-              onMouseLeave={e=>{e.currentTarget.style.borderColor=T.dim;e.currentTarget.style.color=T.muted;}}>
+            </Link>
+            <Link to="/our-work" style={{ background:"transparent", border:`0.5px solid ${T.dim}`, color:T.muted, padding:"0.72rem 1.6rem", borderRadius:5, fontSize:"0.83rem", fontFamily:"Inter,sans-serif", cursor:"pointer", display:"flex", alignItems:"center", gap:8, textDecoration:"none" }}>
               <span style={{ width:18, height:18, borderRadius:"50%", border:`0.5px solid ${T.dim}`, display:"inline-flex", alignItems:"center", justifyContent:"center", fontSize:9 }}>▶</span>
               See Our Work
-            </button>
+            </Link>
           </div>
 
           <HeroTagline />
@@ -171,14 +169,12 @@ export default function DatafalconHome() {
         <h2 style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"clamp(1.4rem,2.5vw,2rem)", fontWeight:600, letterSpacing:"-0.025em", marginBottom:8 }}>Ready to move faster?</h2>
         <p style={{ color:T.muted, fontSize:"0.9rem", marginBottom:"2rem" }}>Tell us what you're building. We'll respond within 48 hours with a clear plan.</p>
         <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-          <button style={{ background:T.cyan, border:"none", color:"#050a12", padding:"0.75rem 1.75rem", borderRadius:5, fontSize:"0.85rem", fontFamily:"Inter,sans-serif", fontWeight:600, cursor:"pointer" }}>
+          <Link to="/contact" style={{ background:T.cyan, border:"none", color:"#050a12", padding:"0.75rem 1.75rem", borderRadius:5, fontSize:"0.85rem", fontFamily:"Inter,sans-serif", fontWeight:600, cursor:"pointer", textDecoration:"none" }}>
             Book a Discovery Call
-          </button>
-          <button style={{ background:"transparent", border:`0.5px solid ${T.dim}`, color:T.muted, padding:"0.75rem 1.75rem", borderRadius:5, fontSize:"0.85rem", fontFamily:"Inter,sans-serif", cursor:"pointer" }}
-            onMouseEnter={e=>{e.currentTarget.style.borderColor=T.muted;e.currentTarget.style.color=T.text;}}
-            onMouseLeave={e=>{e.currentTarget.style.borderColor=T.dim;e.currentTarget.style.color=T.muted;}}>
-            hello@kaizenagentics.io
-          </button>
+          </Link>
+          <a href="mailto:support@kaizenagentics.com" style={{ background:"transparent", border:`0.5px solid ${T.dim}`, color:T.muted, padding:"0.75rem 1.75rem", borderRadius:5, fontSize:"0.85rem", fontFamily:"Inter,sans-serif", cursor:"pointer", textDecoration:"none" }}>
+            support@kaizenagentics.com
+          </a>
         </div>
       </div>
     </PageShell>

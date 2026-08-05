@@ -5,6 +5,8 @@ import ExpertiseDetail from "./ExpertiseDetail";
 import OurWork from "./OurWork";
 import Contact from "./Contact";
 import About from "./About";
+import Terms from "./Terms";
+import Privacy from "./Privacy";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/our-work" element={<OurWork />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
       </Routes>
     </BrowserRouter>
   );
