@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { T } from "../theme";
 import ExpertiseNavMenu from "./ExpertiseNavMenu";
+import Logo from "./Logo";
 import { EXPERTISE_AREAS } from "../data/expertiseAreas";
 
 const NAV_LINKS = [
@@ -220,14 +221,8 @@ export default function Nav() {
 
   return (
     <>
-      <nav style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"1.1rem 2rem", borderBottom:`0.5px solid ${T.border}`, background:"rgba(5,10,18,0.97)", position:"sticky", top:0, zIndex:100 }}>
-        <Link to="/" style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"1.18rem", fontWeight:700, letterSpacing:"-0.02em", display:"flex", alignItems:"center", gap:8, textDecoration:"none" }}>
-          <svg width="26" height="20" viewBox="0 0 26 20" fill="none" aria-hidden="true">
-            <path d="M13 1L3 9l2.5 2L3 14l4.5-1-1 5L13 15l6.5 3-1-5 4.5 1-2.5-3 2.5-2L13 1z" fill="none" stroke="#00d4ff" strokeWidth="1.4" strokeLinejoin="round"/>
-            <path d="M13 1L7 11h12L13 1z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" strokeWidth="0.8"/>
-          </svg>
-          <span style={{ color:T.text }}>Kaizen</span><span style={{ color:T.cyan }}> Agentics</span>
-        </Link>
+      <nav style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"0.5rem 2rem", borderBottom:`0.5px solid ${T.border}`, background:"rgba(5,10,18,0.97)", position:"sticky", top:0, zIndex:100 }}>
+        <Logo height={70} />
 
         <div className="df-nav-links" style={{ display:"flex", gap:"1.75rem", alignItems:"center" }}>
           <ExpertiseNavMenu />

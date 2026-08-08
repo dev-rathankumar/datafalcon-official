@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { T } from "../theme";
+import Logo from "./Logo";
 
 const FOOTER_LINKS = [
   { label: "Privacy Policy", to: "/privacy" },
@@ -11,9 +12,7 @@ export default function Footer() {
   return (
     <footer style={{ borderTop:`0.5px solid ${T.border}`, padding:"1.5rem 2rem" }}>
       <div className="df-fi" style={{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
-        <Link to="/" style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:"1rem", fontWeight:700, textDecoration:"none", color:"inherit" }}>
-          Kaizen<span style={{ color:T.cyan }}> Agentics</span>
-        </Link>
+        <Logo height={40} />
         <div style={{ display:"flex", gap:"1.5rem" }}>
           {FOOTER_LINKS.map(({ label, to }) => (
             <Link key={label} to={to} className="df-fa">{label}</Link>
